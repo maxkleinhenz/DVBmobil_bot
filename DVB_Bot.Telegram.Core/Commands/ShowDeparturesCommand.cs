@@ -15,7 +15,7 @@ namespace DVB_Bot.Telegram.Core.Commands
     {
         public const int MinLengthLine = 3;
         public const int MinLengthFinalStop = 15;
-        public const int MaxLengthFinalStop = 25;
+        public const int MaxLengthFinalStop = 23;
         public const int MinLengthArrivesInMinutes = 2;
 
         private readonly ISendMessageService _sendMessageService;
@@ -125,8 +125,12 @@ namespace DVB_Bot.Telegram.Core.Commands
             builder.AppendLine($"*{departures.StopName}* ({departures.StopShortName})");
             foreach (var row in departures.DepartureRows)
             {
+                var finalStop = row.FinalStop;
+                if (finalStop.Length > MaxLengthFinalStop)
+                    finalStop = finalStop.Substring(0, MaxLengthFinalStop);
+                
                 var paddedLine = row.Line.PadRight(lengthLine, ' ');
-                var paddedFinalStop = row.FinalStop.PadRight(lengthFinalStop, ' ');
+                var paddedFinalStop = finalStop.PadRight(lengthFinalStop, ' ');
                 var paddedArrivesInMinutes = row.ArrivesInMinutes.PadRight(lengthArrivesInMinutes, ' ');
 
                 builder.AppendLine($"`{paddedLine} {paddedFinalStop} {paddedArrivesInMinutes}`");
@@ -136,3 +140,4 @@ namespace DVB_Bot.Telegram.Core.Commands
         }
     }
 }
+
