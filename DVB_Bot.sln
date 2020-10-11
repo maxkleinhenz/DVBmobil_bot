@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Shared", "DVB_Bot.Shared\DVB_Bot.Shared.csproj", "{7430F175-271E-406D-A319-10200B90F914}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Telegram.Core", "DVB_Bot.Telegram.Core\DVB_Bot.Telegram.Core.csproj", "{42BE48AE-831A-4095-B295-E9F79668844C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Telegram.AzureFunctions", "DVB_Bot.Telegram.AzureFunctions\DVB_Bot.Telegram.AzureFunctions.csproj", "{2CE70977-6494-40AF-BFDD-92E9D7423CF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7430F175-271E-406D-A319-10200B90F914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7430F175-271E-406D-A319-10200B90F914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7430F175-271E-406D-A319-10200B90F914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7430F175-271E-406D-A319-10200B90F914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42BE48AE-831A-4095-B295-E9F79668844C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42BE48AE-831A-4095-B295-E9F79668844C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42BE48AE-831A-4095-B295-E9F79668844C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42BE48AE-831A-4095-B295-E9F79668844C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F8B3B05-F259-4855-87CB-78090A993799}
+	EndGlobalSection
+EndGlobal

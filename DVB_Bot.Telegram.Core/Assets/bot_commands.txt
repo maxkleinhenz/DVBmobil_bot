@@ -1,0 +1,4 @@
+add - Füge Haltestelle zu deinen Favoriten hinzu
+remove - Entferne Haltestelle aus deinen Favoriten
+favs - Aktualisiere die Favoritenliste
+help - Hilfe zum Bot
