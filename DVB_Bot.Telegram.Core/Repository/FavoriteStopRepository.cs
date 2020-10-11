@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DVB_Bot.Shared.Contracts;
@@ -29,7 +30,11 @@ namespace DVB_Bot.Telegram.Core.Repository
 
         public async Task<FavoriteStop> RemoveFavoriteStopAsync(string chatId, Stop stop)
         {
-            var favoriteStop = new FavoriteStop(chatId, stop.ShortName);
+            var allFavs = await GetFavoriteStopsAsync(chatId);
+            if (allFavs.All(_ => _.ShortName != stop.ShortName))
+                return null;
+
+            var favoriteStop = new FavoriteStop(chatId, stop.ShortName) { ETag = "*" };
             var insertOperation = TableOperation.Delete(favoriteStop);
             var result = await _table.ExecuteAsync(insertOperation);
 
@@ -45,7 +50,9 @@ namespace DVB_Bot.Telegram.Core.Repository
 
             var continuationToken = new TableContinuationToken();
             var items = await _table.ExecuteQuerySegmentedAsync(query, continuationToken);
-            var favoriteStops = items.Select(item => new FavoriteStop(item)).ToList();
+            var favoriteStops = items.Select(item => new FavoriteStop(item))
+                .OrderBy(_ => _.AddDateTime)
+                .ToList();
 
             var result = new List<Stop>();
             foreach (var favoriteStop in favoriteStops)
