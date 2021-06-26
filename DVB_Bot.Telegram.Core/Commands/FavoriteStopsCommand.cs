@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DVB_Bot.Shared.Results;
+using DVB_Bot.Telegram.Core.Properties;
+using DVB_Bot.Telegram.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DVB_Bot.Shared.Results;
-using DVB_Bot.Telegram.Core.Properties;
-using DVB_Bot.Telegram.Core.Services;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -106,7 +106,7 @@ namespace DVB_Bot.Telegram.Core.Commands
                     await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_StopCouldNotFound);
                     break;
                 case FavoriteStopResultTypes.TooManyFavoriteStops:
-                    await _sendMessageService.SendMessage(chat,Strings.FavoriteStopsCommand_MaxFavorites);
+                    await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_MaxFavorites);
                     break;
                 case FavoriteStopResultTypes.Ok:
                     break;

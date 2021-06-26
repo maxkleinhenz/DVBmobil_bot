@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DVB_Bot.Shared.Contracts;
+﻿using DVB_Bot.Shared.Contracts;
 using DVB_Bot.Shared.Model;
 using DVB_Bot.Shared.Results;
 using DVB_Bot.Telegram.Core.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DVB_Bot.Telegram.Core.Services
 {

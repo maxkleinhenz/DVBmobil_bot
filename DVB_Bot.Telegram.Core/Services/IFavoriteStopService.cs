@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using DVB_Bot.Shared.Model;
+﻿using DVB_Bot.Shared.Model;
 using DVB_Bot.Shared.Results;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DVB_Bot.Telegram.Core.Services
 {

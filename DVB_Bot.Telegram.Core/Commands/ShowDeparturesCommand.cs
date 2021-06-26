@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DVB_Bot.Shared.Model;
+using DVB_Bot.Telegram.Core.Properties;
+using DVB_Bot.Telegram.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DVB_Bot.Shared.Model;
-using DVB_Bot.Telegram.Core.Properties;
-using DVB_Bot.Telegram.Core.Services;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -90,12 +90,13 @@ namespace DVB_Bot.Telegram.Core.Commands
 
             await _sendMessageService.SendMessage(chat, message);
         }
+
         private async Task LoadSuggestions(Chat chat, string name)
         {
             var stops = _stopService.GetStopsByFuzzySearch(name);
             if (!stops.Any())
             {
-                await HandleError(chat, new Departure {DepartureResultState = DepartureResultState.StopNotFound});
+                await HandleError(chat, new Departure { DepartureResultState = DepartureResultState.StopNotFound });
                 return;
             }
 
@@ -108,7 +109,7 @@ namespace DVB_Bot.Telegram.Core.Commands
                     Text = stop.Name,
                     CallbackData = $"{Commands.QueryLoadCommand}{Commands.QueryDataSeparator}{stop.ShortName}"
                 };
-                inlineButtons.Add(new List<InlineKeyboardButton> {button});
+                inlineButtons.Add(new List<InlineKeyboardButton> { button });
             }
 
             var markup = new InlineKeyboardMarkup(inlineButtons);
@@ -128,7 +129,7 @@ namespace DVB_Bot.Telegram.Core.Commands
                 var finalStop = row.FinalStop;
                 if (finalStop.Length > MaxLengthFinalStop)
                     finalStop = finalStop.Substring(0, MaxLengthFinalStop);
-                
+
                 var paddedLine = row.Line.PadRight(lengthLine, ' ');
                 var paddedFinalStop = finalStop.PadRight(lengthFinalStop, ' ');
                 var paddedArrivesInMinutes = row.ArrivesInMinutes.PadRight(lengthArrivesInMinutes, ' ');

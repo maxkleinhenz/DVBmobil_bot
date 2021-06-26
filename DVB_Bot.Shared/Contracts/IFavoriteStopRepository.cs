@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using DVB_Bot.Shared.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using DVB_Bot.Shared.Model;
 
 namespace DVB_Bot.Shared.Contracts
 {

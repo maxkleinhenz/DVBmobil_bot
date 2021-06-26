@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DVB_Bot.Shared.Contracts;
+﻿using DVB_Bot.Shared.Contracts;
 using DVB_Bot.Shared.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DVB_Bot.Telegram.Core.Repository
 {
     public class StopRepository : IStopRepository
     {
-        // ReSharper disable StringLiteralTypo
         private static readonly IDictionary<string, Stop> AllStops = new Dictionary<string, Stop>
             {
                 {"BON", new Stop("BON","Bonnewitz Dorfplatz","Bonnewitz","33003015","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Bonnewitz&hst=Bonnewitz","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33003015")},
@@ -767,7 +766,7 @@ namespace DVB_Bot.Telegram.Core.Repository
                 {"KOL", new Stop("KOL","Köhlerstraße","Weinböhla","33004147","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Köhlerstrasse","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004147")},
                 {"WBL", new Stop("WBL","P+R Hp. Weinböhla","Weinböhla","33004401","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Weinböhla","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004401")}
             };
-       
+
         public Stop GetStopByShortName(string shortName)
         {
             AllStops.TryGetValue(shortName.ToUpper(), out var stop);

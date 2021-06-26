@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
+using System;
 
 namespace DVB_Bot.Shared.Model
 {
-    public class FavoriteStop :TableEntity
+    public class FavoriteStop : TableEntity
     {
         public FavoriteStop(string chatId, string stopShortName)
         {
@@ -20,7 +20,7 @@ namespace DVB_Bot.Shared.Model
 
         public FavoriteStop()
         {
-            
+
         }
 
         public string ChatId
@@ -29,7 +29,8 @@ namespace DVB_Bot.Shared.Model
             set => PartitionKey = value;
         }
 
-        public string StopShortName {
+        public string StopShortName
+        {
             get => RowKey;
             set => RowKey = value;
         }

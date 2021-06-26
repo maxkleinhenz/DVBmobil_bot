@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using DVB_Bot.Shared.Model;
+﻿using DVB_Bot.Shared.Model;
+using System.Collections.Generic;
 
 namespace DVB_Bot.Shared.Contracts
 {
@@ -7,6 +7,5 @@ namespace DVB_Bot.Shared.Contracts
     {
         Stop GetStopByShortName(string shortName);
         List<Stop> GetAllStops();
-
     }
 }

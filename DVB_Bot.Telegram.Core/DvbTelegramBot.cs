@@ -1,13 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using DVB_Bot.Telegram.Core.Commands;
+﻿using DVB_Bot.Telegram.Core.Commands;
 using DVB_Bot.Telegram.Core.Properties;
 using DVB_Bot.Telegram.Core.Repository;
 using DVB_Bot.Telegram.Core.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -28,12 +26,6 @@ namespace DVB_Bot.Telegram.Core
             var token = config["TelegramBotToken"];
             var botClient = new TelegramBotClient(token);
             _sendMessageService = new SendMessageService(botClient);
-        }
-
-        private string GetBasePath()
-        {
-            using var processModule = Process.GetCurrentProcess().MainModule;
-            return Path.GetDirectoryName(processModule?.FileName);
         }
 
         //private static void Main(string[] args)

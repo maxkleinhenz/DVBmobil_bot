@@ -1,10 +1,9 @@
-﻿using System;
+﻿using DVB_Bot.Shared.Contracts;
+using DVB_Bot.Shared.Model;
+using Microsoft.WindowsAzure.Storage.Table;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DVB_Bot.Shared.Contracts;
-using DVB_Bot.Shared.Model;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace DVB_Bot.Telegram.Core.Repository
 {

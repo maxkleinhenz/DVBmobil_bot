@@ -1,13 +1,13 @@
 ﻿
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using DVB_Bot.Shared.Contracts;
 using DVB_Bot.Shared.Model;
 using DVB_Bot.Telegram.Core.Repository;
 using FuzzySharp;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DVB_Bot.Telegram.Core.Services
 {

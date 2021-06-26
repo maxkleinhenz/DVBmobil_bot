@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using DVB_Bot.Shared.Model;
+﻿using DVB_Bot.Shared.Model;
+using System.Collections.Generic;
 
 namespace DVB_Bot.Shared.Results
 {
