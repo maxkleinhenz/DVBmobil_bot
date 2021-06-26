@@ -2,7 +2,7 @@
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace DVB_Bot.Telegram.Core
+namespace DVB_Bot.Telegram.Core.Services
 {
     public interface ISendMessageService
     {
