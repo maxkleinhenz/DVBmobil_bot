@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DVB_Bot.Telegram.AzureFunctions.Repository;
 using DVB_Bot.Telegram.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -27,9 +28,14 @@ namespace DVB_Bot.Telegram.AzureFunctions
             var data = JsonConvert.DeserializeObject<TelegramRequestBody>(requestBody);
 
             var config = CreateConfiguration(context);
-            var favoriteStopTable = await GetFavoriteCloudTable(config);
-            
-            var dvbTelegramBot = new DvbTelegramBot(config, favoriteStopTable);
+
+            var stopTable = await GetCloudTable(config, "Stops");
+            var stopRepository = new AzureStopRepository(stopTable);
+
+            var favoriteStopTable = await GetCloudTable(config, "FavoriteStops");
+            var favoriteStopRepository = new AzureFavoriteStopRepository(favoriteStopTable);
+
+            var dvbTelegramBot = new DvbTelegramBot(config["TelegramBotToken"], stopRepository, favoriteStopRepository);
 
             if (data.Message != null)
             {
@@ -57,11 +63,11 @@ namespace DVB_Bot.Telegram.AzureFunctions
             return config;
         }
 
-        private static async Task<CloudTable> GetFavoriteCloudTable(IConfiguration config)
+        private static async Task<CloudTable> GetCloudTable(IConfiguration config, string tableName)
         {
             var storageAccount = CloudStorageAccount.Parse(config["StorageConnectionString"]);
             var tableClient = storageAccount.CreateCloudTableClient();
-            var favoriteStopTable = tableClient.GetTableReference("FavoriteStops");
+            var favoriteStopTable = tableClient.GetTableReference(tableName);
             await favoriteStopTable.CreateIfNotExistsAsync();
 
             return favoriteStopTable;

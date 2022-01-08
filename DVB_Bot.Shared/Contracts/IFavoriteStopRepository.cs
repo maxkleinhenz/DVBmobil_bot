@@ -6,8 +6,8 @@ namespace DVB_Bot.Shared.Contracts
 {
     public interface IFavoriteStopRepository
     {
-        Task<FavoriteStop> AddFavoriteStopAsync(string chatId, Stop stop);
-        Task<FavoriteStop> RemoveFavoriteStopAsync(string chatId, Stop stop);
-        Task<List<Stop>> GetFavoriteStopsAsync(string chatId);
+        Task<IFavoriteStop> AddFavoriteStopAsync(string chatId, string stopShortName);
+        Task<IFavoriteStop> RemoveFavoriteStopAsync(string chatId, string stopShortName);
+        Task<List<IFavoriteStop>> GetFavoriteStopsAsync(string chatId);
     }
 }

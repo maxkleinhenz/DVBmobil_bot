@@ -8,8 +8,8 @@ namespace DVB_Bot.Shared.Results
         public bool IsSuccessful => ResultType == FavoriteStopResultTypes.Ok;
 
         public FavoriteStopResultTypes ResultType { get; set; }
-        public FavoriteStop FavoriteStop { get; set; }
-        public List<Stop> AllFavoriteStops { get; set; }
+        public IFavoriteStop FavoriteStop { get; set; }
+        public List<IFavoriteStop> AllFavoriteStops { get; set; }
     }
 
     public enum FavoriteStopResultTypes

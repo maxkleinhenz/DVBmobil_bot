@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace DVB_Bot.Telegram.Core.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -76,7 +79,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Von den Favoriten entfernt..
+        ///   Looks up a localized string similar to Haltestelle von den Favoriten entfernt..
         /// </summary>
         internal static string FavoriteStopsCommand_RemovedFromFavorites {
             get {
@@ -94,7 +97,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zu deinen Favoriten hinzugefügt..
+        ///   Looks up a localized string similar to Haltestelle zu deinen Favoriten hinzugefügt..
         /// </summary>
         internal static string FavoriteStopsCommand_StopHasBeenAddedToFavorites {
             get {
@@ -144,7 +147,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         ///- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
         ///- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
         ///- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
-        ///- Schreibe /favs, um keine Favoritenliste in der App zu aktualisieren, falls sie nicht mehr angezeigt wird.
+        ///- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen.
         /// </summary>
         internal static string Programm_HelpMessage {
             get {
@@ -154,7 +157,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Hallo,
-        ///bei mir kannst du dich über die Abfahrten zu den Haltestellen der DVB in Dresden und Umgebung informieren..
+        ///bei mir kannst du dich über die Abfahrten an den Haltestellen der DVB in Dresden und Umgebung informieren..
         /// </summary>
         internal static string Programm_StartMessage {
             get {

@@ -1,6 +1,6 @@
 ﻿namespace DVB_Bot.Shared.Model
 {
-    public class Stop
+    public class Stop : IStop
     {
         public string ShortName { get; set; }
         public string Name { get; set; }

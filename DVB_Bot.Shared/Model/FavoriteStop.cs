@@ -1,40 +1,18 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
-using System;
+﻿using System;
 
 namespace DVB_Bot.Shared.Model
 {
-    public class FavoriteStop : TableEntity
+    public class FavoriteStop : IFavoriteStop
     {
-        public FavoriteStop(string chatId, string stopShortName)
+        public string ChatId { get; set; }
+        public string StopShortName { get; set; }
+        public DateTime AddDateTime { get; set; }
+
+        public FavoriteStop(string chatId, string stopShortName, DateTime? addDateTime = null)
         {
             this.ChatId = chatId;
             this.StopShortName = stopShortName;
-            AddDateTime = DateTime.Now;
+            AddDateTime = addDateTime ?? DateTime.Now;
         }
-
-        public FavoriteStop(DynamicTableEntity tableEntity) : base(tableEntity.PartitionKey, tableEntity.RowKey)
-        {
-            tableEntity.Properties.TryGetValue(nameof(FavoriteStop.AddDateTime), out var property);
-            AddDateTime = (property?.DateTime).GetValueOrDefault();
-        }
-
-        public FavoriteStop()
-        {
-
-        }
-
-        public string ChatId
-        {
-            get => PartitionKey;
-            set => PartitionKey = value;
-        }
-
-        public string StopShortName
-        {
-            get => RowKey;
-            set => RowKey = value;
-        }
-
-        public DateTime AddDateTime { get; set; }
     }
 }

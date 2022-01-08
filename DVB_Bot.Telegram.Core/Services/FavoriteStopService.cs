@@ -1,7 +1,6 @@
 ﻿using DVB_Bot.Shared.Contracts;
 using DVB_Bot.Shared.Model;
 using DVB_Bot.Shared.Results;
-using DVB_Bot.Telegram.Core.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +12,16 @@ namespace DVB_Bot.Telegram.Core.Services
     {
         public const int MaxFavoriteStops = 12;
 
+        private readonly IStopRepository _stopRepository;
         private readonly IFavoriteStopRepository _favoriteStopRepository;
 
-        private IStopRepository _stopRepository;
-
-        public IStopRepository StopRepository
+        public FavoriteStopService(IStopRepository stopRepository, IFavoriteStopRepository favoriteStopRepository)
         {
-            get => _stopRepository ??= new StopRepository();
-            set => _stopRepository = value;
-        }
-
-        public FavoriteStopService(IFavoriteStopRepository favoriteStopRepository)
-        {
+            _stopRepository = stopRepository;
             _favoriteStopRepository = favoriteStopRepository;
         }
 
-        public async Task<List<Stop>> GetFavoriteStops(string chatId)
+        public async Task<List<IFavoriteStop>> GetFavoriteStops(string chatId)
         {
             return await _favoriteStopRepository.GetFavoriteStopsAsync(chatId);
         }
@@ -36,12 +29,12 @@ namespace DVB_Bot.Telegram.Core.Services
         public async Task<bool> IsFavoriteStop(string chatId, string shortName)
         {
             var allFavs = await GetFavoriteStops(chatId);
-            return allFavs.Any(_ => string.Equals(_.ShortName, shortName, StringComparison.CurrentCultureIgnoreCase));
+            return allFavs.Any(f => string.Equals(f.StopShortName, shortName, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public async Task<FavoriteStopResult> AddFavoriteStop(string chatId, string shortName)
         {
-            var stop = StopRepository.GetStopByShortName(shortName);
+            var stop = await _stopRepository.GetStopByShortNameAsync(shortName);
             if (stop == null)
                 return new FavoriteStopResult { ResultType = FavoriteStopResultTypes.StopNotFound };
 
@@ -49,7 +42,7 @@ namespace DVB_Bot.Telegram.Core.Services
             if (existingFavoriteStops.Count == MaxFavoriteStops)
                 return new FavoriteStopResult { ResultType = FavoriteStopResultTypes.TooManyFavoriteStops };
 
-            var favoriteStop = await _favoriteStopRepository.AddFavoriteStopAsync(chatId, stop);
+            var favoriteStop = await _favoriteStopRepository.AddFavoriteStopAsync(chatId, shortName);
             if (favoriteStop == null)
                 return new FavoriteStopResult { ResultType = FavoriteStopResultTypes.StopAlreadyAdded };
 
@@ -64,11 +57,7 @@ namespace DVB_Bot.Telegram.Core.Services
 
         public async Task<FavoriteStopResult> RemoveFavoriteStop(string chatId, string shortName)
         {
-            var stop = StopRepository.GetStopByShortName(shortName);
-            if (stop == null)
-                return new FavoriteStopResult { ResultType = FavoriteStopResultTypes.StopNotFound };
-
-            var favoriteStop = await _favoriteStopRepository.RemoveFavoriteStopAsync(chatId, stop);
+            var favoriteStop = await _favoriteStopRepository.RemoveFavoriteStopAsync(chatId, shortName);
             if (favoriteStop == null)
                 return new FavoriteStopResult { ResultType = FavoriteStopResultTypes.StopIsntFavorite };
 

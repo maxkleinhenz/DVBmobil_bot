@@ -136,10 +136,10 @@
     <value>Meintest du?</value>
   </data>
   <data name="FavoriteStopsCommand_StopHasBeenAddedToFavorites" xml:space="preserve">
-    <value>Zu deinen Favoriten hinzugefügt.</value>
+    <value>Haltestelle zu deinen Favoriten hinzugefügt.</value>
   </data>
   <data name="FavoriteStopsCommand_RemovedFromFavorites" xml:space="preserve">
-    <value>Von den Favoriten entfernt.</value>
+    <value>Haltestelle von den Favoriten entfernt.</value>
   </data>
   <data name="FavoriteStopsCommand_RefreshFavorties" xml:space="preserve">
     <value>Favoriten aktualisiert.</value>
@@ -158,7 +158,7 @@
   </data>
   <data name="Programm_StartMessage" xml:space="preserve">
     <value>Hallo,
-bei mir kannst du dich über die Abfahrten zu den Haltestellen der DVB in Dresden und Umgebung informieren.</value>
+bei mir kannst du dich über die Abfahrten an den Haltestellen der DVB in Dresden und Umgebung informieren.</value>
   </data>
   <data name="Program_SpecifyStop" xml:space="preserve">
     <value>Bitte gebe auch das Haltestellenkürzel an.
@@ -172,6 +172,6 @@ Zum Beispiel: {0} HBF</value>
 - Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
 - Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
 - Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
-- Schreibe /favs, um keine Favoritenliste in der App zu aktualisieren, falls sie nicht mehr angezeigt wird</value>
+- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen</value>
   </data>
 </root>

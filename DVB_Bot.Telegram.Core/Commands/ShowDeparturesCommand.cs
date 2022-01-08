@@ -93,7 +93,7 @@ namespace DVB_Bot.Telegram.Core.Commands
 
         private async Task LoadSuggestions(Chat chat, string name)
         {
-            var stops = _stopService.GetStopsByFuzzySearch(name);
+            var stops = await _stopService.GetStopsByFuzzySearch(name);
             if (!stops.Any())
             {
                 await HandleError(chat, new Departure { DepartureResultState = DepartureResultState.StopNotFound });

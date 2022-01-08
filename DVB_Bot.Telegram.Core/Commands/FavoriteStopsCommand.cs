@@ -53,8 +53,8 @@ namespace DVB_Bot.Telegram.Core.Commands
 
         public async Task ShowFavoriteStops(Chat chat)
         {
-            var stops = await _favoriteStopService.GetFavoriteStops(chat.Id.ToString());
-            var keyboardMarkup = CreateReplyKeyboardMarkup(stops.Select(_ => _.ShortName));
+            var favoriteStops = await _favoriteStopService.GetFavoriteStops(chat.Id.ToString());
+            var keyboardMarkup = CreateReplyKeyboardMarkup(favoriteStops.Select(f => f.StopShortName));
             await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_RefreshFavorties, keyboardMarkup);
         }
 
@@ -64,7 +64,7 @@ namespace DVB_Bot.Telegram.Core.Commands
 
             var nestedButtonList = new List<List<KeyboardButton>>();
             var tempButton = new List<KeyboardButton>();
-            for (int i = 0; i < buttons.Count; i++)
+            for (var i = 0; i < buttons.Count; i++)
             {
                 tempButton.Add(buttons[i]);
                 if (i % ButtonPerRow == ButtonPerRow - 1)
@@ -87,7 +87,7 @@ namespace DVB_Bot.Telegram.Core.Commands
             }
             else
             {
-                var keyboardMarkup = CreateReplyKeyboardMarkup(result.AllFavoriteStops.Select(_ => _.ShortName));
+                var keyboardMarkup = CreateReplyKeyboardMarkup(result.AllFavoriteStops.Select(f => f.StopShortName));
                 await _sendMessageService.SendMessage(chat, message, keyboardMarkup);
             }
         }
