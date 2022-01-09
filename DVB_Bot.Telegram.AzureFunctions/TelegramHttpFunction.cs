@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DVB_Bot.AzureFunctions.Helper;
 using DVB_Bot.Telegram.AzureFunctions.Repository;
 using DVB_Bot.Telegram.Core;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +10,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 
 namespace DVB_Bot.Telegram.AzureFunctions
@@ -29,21 +28,24 @@ namespace DVB_Bot.Telegram.AzureFunctions
 
             var config = CreateConfiguration(context);
 
-            var stopTable = await GetCloudTable(config, "Stops");
+            var cloudTableClientHelper = new CloudTableClientHelper();
+            var tableClient = cloudTableClientHelper.GetTableClient(config["StorageConnectionString"]);
+
+            var stopTable = await cloudTableClientHelper.GetCloudTableAsync(tableClient, "Stops");
             var stopRepository = new AzureStopRepository(stopTable);
 
-            var favoriteStopTable = await GetCloudTable(config, "FavoriteStops");
+            var favoriteStopTable = await cloudTableClientHelper.GetCloudTableAsync(tableClient, "FavoriteStops");
             var favoriteStopRepository = new AzureFavoriteStopRepository(favoriteStopTable);
 
             var dvbTelegramBot = new DvbTelegramBot(config["TelegramBotToken"], stopRepository, favoriteStopRepository);
 
             if (data.Message != null)
             {
-                await dvbTelegramBot.ComputeMessage(data.Message);
+                await dvbTelegramBot.ComputeMessageAsync(data.Message);
             }
             else if (data.Callback_Query != null)
             {
-                await dvbTelegramBot.ComputeCallbackQuery(data.Callback_Query);
+                await dvbTelegramBot.ComputeCallbackQueryAsync(data.Callback_Query);
             }
             else
             {
@@ -61,16 +63,6 @@ namespace DVB_Bot.Telegram.AzureFunctions
                 .AddEnvironmentVariables();
             var config = configBuilder.Build();
             return config;
-        }
-
-        private static async Task<CloudTable> GetCloudTable(IConfiguration config, string tableName)
-        {
-            var storageAccount = CloudStorageAccount.Parse(config["StorageConnectionString"]);
-            var tableClient = storageAccount.CreateCloudTableClient();
-            var favoriteStopTable = tableClient.GetTableReference(tableName);
-            await favoriteStopTable.CreateIfNotExistsAsync();
-
-            return favoriteStopTable;
         }
     }
 }
