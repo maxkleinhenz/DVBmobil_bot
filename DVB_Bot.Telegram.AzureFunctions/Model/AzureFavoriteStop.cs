@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using DVB_Bot.Shared.Model;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace DVB_Bot.Telegram.AzureFunctions.Model
 {
+    [DebuggerDisplay("{ChatId} {StopShortName}")]
     public class AzureFavoriteStop : TableEntity, IFavoriteStop
     {
         /// <summary>
@@ -16,6 +18,8 @@ namespace DVB_Bot.Telegram.AzureFunctions.Model
         /// </summary>
         public string StopShortName { get; set; }
         public DateTime AddDateTime { get; set; }
+
+        public AzureFavoriteStop() { }
 
         public AzureFavoriteStop(DynamicTableEntity tableEntity) : base(tableEntity.PartitionKey, tableEntity.RowKey)
         {

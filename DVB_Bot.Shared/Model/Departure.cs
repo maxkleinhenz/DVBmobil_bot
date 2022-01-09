@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace DVB_Bot.Shared.Model
 {
+    [DebuggerDisplay("{StopShortName} {StopName}")]
     public class Departure
     {
         public string StopName { get; set; }

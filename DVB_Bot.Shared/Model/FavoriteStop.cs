@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace DVB_Bot.Shared.Model
 {
+    [DebuggerDisplay("{ChatId} {StopShortName}")]
     public class FavoriteStop : IFavoriteStop
     {
         public string ChatId { get; set; }
@@ -10,8 +12,8 @@ namespace DVB_Bot.Shared.Model
 
         public FavoriteStop(string chatId, string stopShortName, DateTime? addDateTime = null)
         {
-            this.ChatId = chatId;
-            this.StopShortName = stopShortName;
+            ChatId = chatId;
+            StopShortName = stopShortName;
             AddDateTime = addDateTime ?? DateTime.Now;
         }
     }

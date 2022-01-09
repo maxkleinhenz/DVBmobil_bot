@@ -1,5 +1,8 @@
-﻿namespace DVB_Bot.Shared.Model
+﻿using System.Diagnostics;
+
+namespace DVB_Bot.Shared.Model
 {
+    [DebuggerDisplay("{ShortName} {Name}")]
     public class Stop : IStop
     {
         public string ShortName { get; set; }
