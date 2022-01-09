@@ -338,5 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/DVB_Bot.Telegram/appsettings.json
-/DVB_Bot.Telegram.AzureFunctions/appsettings.json
+/DVB_Bot.Telegram.Local/appSecrets.json
+/DVB_Bot.AzureFunctions.Importer/appSecrets.json
