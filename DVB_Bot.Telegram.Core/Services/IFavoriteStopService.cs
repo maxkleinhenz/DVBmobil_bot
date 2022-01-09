@@ -7,9 +7,9 @@ namespace DVB_Bot.Telegram.Core.Services
 {
     public interface IFavoriteStopService
     {
-        Task<List<IFavoriteStop>> GetFavoriteStops(string chatId);
-        Task<bool> IsFavoriteStop(string chatId, string shortName);
-        Task<FavoriteStopResult> AddFavoriteStop(string chatId, string shortName);
-        Task<FavoriteStopResult> RemoveFavoriteStop(string chatId, string shortName);
+        Task<List<IFavoriteStop>> GetFavoriteStopsAsync(string chatId);
+        Task<bool> IsFavoriteStopAsync(string chatId, string shortName);
+        Task<FavoriteStopResult> AddFavoriteStopAsync(string chatId, string shortName);
+        Task<FavoriteStopResult> RemoveFavoriteStopAsync(string chatId, string shortName);
     }
 }

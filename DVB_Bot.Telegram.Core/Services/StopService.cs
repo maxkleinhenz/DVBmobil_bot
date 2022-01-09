@@ -1,17 +1,16 @@
-﻿using DVB_Bot.Shared.Contracts;
-using DVB_Bot.Shared.Model;
+﻿using DVB_Bot.Shared.Model;
 using FuzzySharp;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DVB_Bot.Shared.Repository;
 
 namespace DVB_Bot.Telegram.Core.Services
 {
     public class StopService : IStopService
     {
-
         public const int DepartureShortLimit = 10;
         public const int DepartureLongLimit = 20;
 
@@ -20,8 +19,6 @@ namespace DVB_Bot.Telegram.Core.Services
         private const string StopBaseUrl = "http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort={0}&hst={1}";
         private const string DepartureBaseUrl = "http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}";
 
-        private const string StopsDdResource = "DVB_Bot.Core.Assets.stops.csv";
-
         private readonly IStopRepository _stopRepository;
 
         public StopService(IStopRepository stopRepository)
@@ -29,12 +26,7 @@ namespace DVB_Bot.Telegram.Core.Services
             _stopRepository = stopRepository;
         }
 
-        //public async Task StoreAllStopsInDbFromApiAwait(IProgress<string> progress)
-        //{
-        //    await StoreStopsAwait(StopsDdResource, progress);
-        //}
-
-        public async Task<Departure> GetDepartureFromShortName(string shortName, int limit)
+        public async Task<Departure> GetDepartureFromShortNameAsync(string shortName, int limit)
         {
             var stop = await _stopRepository.GetStopByShortNameAsync(shortName);
             if (stop == null)
@@ -77,7 +69,7 @@ namespace DVB_Bot.Telegram.Core.Services
             };
         }
 
-        public async Task<List<IStop>> GetStopsByFuzzySearch(string name)
+        public async Task<List<IStop>> GetStopsByFuzzySearchAsync(string name)
         {
             var allStops = await _stopRepository.GetAllStopsAsync();
             var allStopNames = allStops.Select(_ => _.Name).ToArray();

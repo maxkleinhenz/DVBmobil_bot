@@ -6,7 +6,7 @@ namespace DVB_Bot.Telegram.Core.Services
 {
     public interface IStopService
     {
-        Task<Departure> GetDepartureFromShortName(string shortName, int limit);
-        Task<List<IStop>> GetStopsByFuzzySearch(string name);
+        Task<Departure> GetDepartureFromShortNameAsync(string shortName, int limit);
+        Task<List<IStop>> GetStopsByFuzzySearchAsync(string name);
     }
 }

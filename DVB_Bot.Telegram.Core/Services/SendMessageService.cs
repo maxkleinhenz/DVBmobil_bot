@@ -15,7 +15,7 @@ namespace DVB_Bot.Telegram.Core.Services
             _botClient = botClient;
         }
 
-        public async Task SendMessage(Chat chat, string message)
+        public async Task SendMessageAsync(Chat chat, string message)
         {
             await _botClient.SendTextMessageAsync(
                 chatId: chat,
@@ -24,7 +24,7 @@ namespace DVB_Bot.Telegram.Core.Services
             );
         }
 
-        public async Task SendMessage(Chat chat, string message, IReplyMarkup replyMarkup)
+        public async Task SendMessageAsync(Chat chat, string message, IReplyMarkup replyMarkup)
         {
             await _botClient.SendTextMessageAsync(
                 chatId: chat,

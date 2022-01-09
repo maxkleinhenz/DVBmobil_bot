@@ -3,7 +3,7 @@ using DVB_Bot.Telegram.Core.Properties;
 using DVB_Bot.Telegram.Core.Services;
 using System;
 using System.Threading.Tasks;
-using DVB_Bot.Shared.Contracts;
+using DVB_Bot.Shared.Repository;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -26,7 +26,7 @@ namespace DVB_Bot.Telegram.Core
             _sendMessageService = new SendMessageService(TelegramBotClient);
         }
 
-        public async Task ComputeMessage(Message telegramMessage)
+        public async Task ComputeMessageAsync(Message telegramMessage)
         {
             try
             {
@@ -43,13 +43,13 @@ namespace DVB_Bot.Telegram.Core
                 if (splittedMessage[0] == Commands.Commands.CommandStart)
                 {
                     // print start message
-                    await _sendMessageService.SendMessage(telegramMessage.Chat, Strings.Programm_StartMessage);
-                    await _sendMessageService.SendMessage(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_StartMessage);
+                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
                 }
                 else if (splittedMessage[0] == Commands.Commands.CommandHelp)
                 {
                     // print help message
-                    await _sendMessageService.SendMessage(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
                 }
                 else if (splittedMessage[0] == Commands.Commands.CommandAddStation)
                 {
@@ -57,12 +57,12 @@ namespace DVB_Bot.Telegram.Core
                     if (string.IsNullOrEmpty(shortName))
                     {
                         var m = string.Format(Strings.Program_SpecifyStop, Commands.Commands.CommandAddStation);
-                        await _sendMessageService.SendMessage(telegramMessage.Chat, m);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, m);
                         return;
                     }
 
                     var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await command.AddFavoriteStop(telegramMessage.Chat, shortName);
+                    await command.AddFavoriteStopAsync(telegramMessage.Chat, shortName);
                 }
                 else if (splittedMessage[0] == Commands.Commands.CommandRemoveStation)
                 {
@@ -70,31 +70,31 @@ namespace DVB_Bot.Telegram.Core
                     if (string.IsNullOrEmpty(shortName))
                     {
                         var m = string.Format(Strings.Program_SpecifyStop, Commands.Commands.CommandRemoveStation);
-                        await _sendMessageService.SendMessage(telegramMessage.Chat, m);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, m);
                         return;
                     }
 
                     var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await command.RemoveFavoriteStop(telegramMessage.Chat, shortName);
+                    await command.RemoveFavoriteStopAsync(telegramMessage.Chat, shortName);
                 }
                 else if (splittedMessage[0] == Commands.Commands.CommandShowFavoriteStations)
                 {
                     // refresh keys
                     var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await command.ShowFavoriteStops(telegramMessage.Chat);
+                    await command.ShowFavoriteStopsAsync(telegramMessage.Chat);
                 }
                 else if (splittedMessage[0].StartsWith("/"))
                 {
                     // invalid command
-                    await _sendMessageService.SendMessage(telegramMessage.Chat, Strings.Program_InvalidCommand);
-                    await _sendMessageService.SendMessage(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Program_InvalidCommand);
+                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
                 }
                 else
                 {
                     // send departures
                     var stopShortName = splittedMessage[0];
                     var command = new ShowDeparturesCommand(_sendMessageService, _stopService, _favoriteStopService);
-                    await command.ShowDepartures(telegramMessage.Chat, stopShortName,
+                    await command.ShowDeparturesAsync(telegramMessage.Chat, stopShortName,
                         StopService.DepartureShortLimit);
                 }
             }
@@ -104,7 +104,7 @@ namespace DVB_Bot.Telegram.Core
             }
         }
 
-        public async Task ComputeCallbackQuery(CallbackQuery callbackQuery)
+        public async Task ComputeCallbackQueryAsync(CallbackQuery callbackQuery)
         {
             try
             {
@@ -115,17 +115,17 @@ namespace DVB_Bot.Telegram.Core
                 if (command == Commands.Commands.QueryLoadCommand)
                 {
                     var c = new ShowDeparturesCommand(_sendMessageService, _stopService, _favoriteStopService);
-                    await c.ShowDepartures(callbackQuery.Message.Chat, shortName, StopService.DepartureShortLimit);
+                    await c.ShowDeparturesAsync(callbackQuery.Message.Chat, shortName, StopService.DepartureShortLimit);
                 }
                 else if (command == Commands.Commands.QueryLoadMoreCommand)
                 {
                     var c = new ShowDeparturesCommand(_sendMessageService, _stopService, _favoriteStopService);
-                    await c.ShowDepartures(callbackQuery.Message.Chat, shortName, StopService.DepartureLongLimit);
+                    await c.ShowDeparturesAsync(callbackQuery.Message.Chat, shortName, StopService.DepartureLongLimit);
                 }
                 else if (command == Commands.Commands.QueryAddToFavoriteCommand)
                 {
                     var f = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await f.AddFavoriteStop(callbackQuery.Message.Chat, shortName);
+                    await f.AddFavoriteStopAsync(callbackQuery.Message.Chat, shortName);
                 }
             }
             catch (Exception exception)
@@ -133,11 +133,5 @@ namespace DVB_Bot.Telegram.Core
                 Console.WriteLine(exception);
             }
         }
-
-        //private async Task InitDvbBotDBAsync()
-        //{
-        //    var progress = new Progress<string>(Console.WriteLine);
-        //    await _stopService.StoreAllStopsInDbFromApiAwait(progress);
-        //}
     }
 }

@@ -15,7 +15,7 @@ namespace DVB_Bot.Telegram.Core.Commands
     {
         public const int MinLengthLine = 3;
         public const int MinLengthFinalStop = 15;
-        public const int MaxLengthFinalStop = 23;
+        public const int MaxLengthFinalStop = 20;
         public const int MinLengthArrivesInMinutes = 2;
 
         private readonly ISendMessageService _sendMessageService;
@@ -29,25 +29,25 @@ namespace DVB_Bot.Telegram.Core.Commands
             _favoriteStopService = favoriteStopService;
         }
 
-        public async Task ShowDepartures(Chat chat, string shortName, int limit)
+        public async Task ShowDeparturesAsync(Chat chat, string shortName, int limit)
         {
-            var departures = await _stopService.GetDepartureFromShortName(shortName, limit);
+            var departures = await _stopService.GetDepartureFromShortNameAsync(shortName, limit);
 
             if (departures.DepartureResultState == DepartureResultState.Ok)
             {
-                await HandleSuccess(chat, shortName, departures);
+                await HandleSuccessAsync(chat, shortName, departures);
             }
             else if (departures.DepartureResultState == DepartureResultState.StopNotFound)
             {
-                await LoadSuggestions(chat, shortName);
+                await LoadSuggestionsAsync(chat, shortName);
             }
             else
             {
-                await HandleError(chat, departures);
+                await HandleErrorAsync(chat, departures);
             }
         }
 
-        private async Task HandleSuccess(Chat chat, string shortName, Departure departures)
+        private async Task HandleSuccessAsync(Chat chat, string shortName, Departure departures)
         {
             var message = GetFormattedDepartureMessage(departures);
 
@@ -64,7 +64,7 @@ namespace DVB_Bot.Telegram.Core.Commands
                 inlineButtons.Add(new List<InlineKeyboardButton> { button });
             }
 
-            if (!await _favoriteStopService.IsFavoriteStop(chat.Id.ToString(), shortName))
+            if (!await _favoriteStopService.IsFavoriteStopAsync(chat.Id.ToString(), shortName))
             {
                 var button = new InlineKeyboardButton
                 {
@@ -75,10 +75,10 @@ namespace DVB_Bot.Telegram.Core.Commands
             }
 
             var markup = new InlineKeyboardMarkup(inlineButtons);
-            await _sendMessageService.SendMessage(chat, message, markup);
+            await _sendMessageService.SendMessageAsync(chat, message, markup);
         }
 
-        private async Task HandleError(Chat chat, Departure departures)
+        private async Task HandleErrorAsync(Chat chat, Departure departures)
         {
             var message = departures.DepartureResultState switch
             {
@@ -88,15 +88,15 @@ namespace DVB_Bot.Telegram.Core.Commands
                 _ => Strings.ShowDeparturesCommand_Error
             };
 
-            await _sendMessageService.SendMessage(chat, message);
+            await _sendMessageService.SendMessageAsync(chat, message);
         }
 
-        private async Task LoadSuggestions(Chat chat, string name)
+        private async Task LoadSuggestionsAsync(Chat chat, string name)
         {
-            var stops = await _stopService.GetStopsByFuzzySearch(name);
+            var stops = await _stopService.GetStopsByFuzzySearchAsync(name);
             if (!stops.Any())
             {
-                await HandleError(chat, new Departure { DepartureResultState = DepartureResultState.StopNotFound });
+                await HandleErrorAsync(chat, new Departure { DepartureResultState = DepartureResultState.StopNotFound });
                 return;
             }
 
@@ -113,7 +113,7 @@ namespace DVB_Bot.Telegram.Core.Commands
             }
 
             var markup = new InlineKeyboardMarkup(inlineButtons);
-            await _sendMessageService.SendMessage(chat, message, markup);
+            await _sendMessageService.SendMessageAsync(chat, message, markup);
         }
 
         private static string GetFormattedDepartureMessage(Departure departures)

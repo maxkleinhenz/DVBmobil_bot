@@ -23,42 +23,42 @@ namespace DVB_Bot.Telegram.Core.Commands
             _favoriteStopService = favoriteStopService;
         }
 
-        public async Task AddFavoriteStop(Chat chat, string shortName)
+        public async Task AddFavoriteStopAsync(Chat chat, string shortName)
         {
-            var result = await _favoriteStopService.AddFavoriteStop(chat.Id.ToString(), shortName);
+            var result = await _favoriteStopService.AddFavoriteStopAsync(chat.Id.ToString(), shortName);
 
             if (result.IsSuccessful)
             {
-                await HandleSuccess(chat, result, Strings.FavoriteStopsCommand_StopHasBeenAddedToFavorites);
+                await HandleSuccessAsync(chat, result, Strings.FavoriteStopsCommand_StopHasBeenAddedToFavorites);
             }
             else
             {
-                await HandleError(chat, result);
+                await HandleErrorAsync(chat, result);
             }
         }
 
-        public async Task RemoveFavoriteStop(Chat chat, string shortName)
+        public async Task RemoveFavoriteStopAsync(Chat chat, string shortName)
         {
-            var result = await _favoriteStopService.RemoveFavoriteStop(chat.Id.ToString(), shortName);
+            var result = await _favoriteStopService.RemoveFavoriteStopAsync(chat.Id.ToString(), shortName);
 
             if (result.IsSuccessful)
             {
-                await HandleSuccess(chat, result, Strings.FavoriteStopsCommand_RemovedFromFavorites);
+                await HandleSuccessAsync(chat, result, Strings.FavoriteStopsCommand_RemovedFromFavorites);
             }
             else
             {
-                await HandleError(chat, result);
+                await HandleErrorAsync(chat, result);
             }
         }
 
-        public async Task ShowFavoriteStops(Chat chat)
+        public async Task ShowFavoriteStopsAsync(Chat chat)
         {
-            var favoriteStops = await _favoriteStopService.GetFavoriteStops(chat.Id.ToString());
+            var favoriteStops = await _favoriteStopService.GetFavoriteStopsAsync(chat.Id.ToString());
             var keyboardMarkup = CreateReplyKeyboardMarkup(favoriteStops.Select(f => f.StopShortName));
-            await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_RefreshFavorties, keyboardMarkup);
+            await _sendMessageService.SendMessageAsync(chat, Strings.FavoriteStopsCommand_RefreshFavorties, keyboardMarkup);
         }
 
-        private ReplyKeyboardMarkup CreateReplyKeyboardMarkup(IEnumerable<string> shortNames)
+        private static ReplyKeyboardMarkup CreateReplyKeyboardMarkup(IEnumerable<string> shortNames)
         {
             var buttons = shortNames.Select(_ => new KeyboardButton(_)).ToList();
 
@@ -79,34 +79,34 @@ namespace DVB_Bot.Telegram.Core.Commands
             return new ReplyKeyboardMarkup(nestedButtonList, resizeKeyboard: true);
         }
 
-        private async Task HandleSuccess(Chat chat, FavoriteStopResult result, string message)
+        private async Task HandleSuccessAsync(Chat chat, FavoriteStopResult result, string message)
         {
             if (!result.AllFavoriteStops.Any())
             {
-                await _sendMessageService.SendMessage(chat, message, new ReplyKeyboardRemove());
+                await _sendMessageService.SendMessageAsync(chat, message, new ReplyKeyboardRemove());
             }
             else
             {
                 var keyboardMarkup = CreateReplyKeyboardMarkup(result.AllFavoriteStops.Select(f => f.StopShortName));
-                await _sendMessageService.SendMessage(chat, message, keyboardMarkup);
+                await _sendMessageService.SendMessageAsync(chat, message, keyboardMarkup);
             }
         }
 
-        private async Task HandleError(Chat chat, FavoriteStopResult result)
+        private async Task HandleErrorAsync(Chat chat, FavoriteStopResult result)
         {
             switch (result.ResultType)
             {
                 case FavoriteStopResultTypes.StopAlreadyAdded:
-                    await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_StopIsAlreadyFavorites);
+                    await _sendMessageService.SendMessageAsync(chat, Strings.FavoriteStopsCommand_StopIsAlreadyFavorites);
                     break;
                 case FavoriteStopResultTypes.StopIsntFavorite:
-                    await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_StopIsNotFavorite);
+                    await _sendMessageService.SendMessageAsync(chat, Strings.FavoriteStopsCommand_StopIsNotFavorite);
                     break;
                 case FavoriteStopResultTypes.StopNotFound:
-                    await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_StopCouldNotFound);
+                    await _sendMessageService.SendMessageAsync(chat, Strings.FavoriteStopsCommand_StopCouldNotFound);
                     break;
                 case FavoriteStopResultTypes.TooManyFavoriteStops:
-                    await _sendMessageService.SendMessage(chat, Strings.FavoriteStopsCommand_MaxFavorites);
+                    await _sendMessageService.SendMessageAsync(chat, Strings.FavoriteStopsCommand_MaxFavorites);
                     break;
                 case FavoriteStopResultTypes.Ok:
                     break;
