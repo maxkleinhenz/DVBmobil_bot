@@ -11,12 +11,20 @@ namespace DVB_Bot.Telegram.AzureFunctions.Model
         /// <summary>
         /// PartitionKey
         /// </summary>
-        public string ChatId { get; set; }
+        public string ChatId
+        {
+            get => PartitionKey;
+            set => PartitionKey = value;
+        }
 
         /// <summary>
         /// RowKey
         /// </summary>
-        public string StopShortName { get; set; }
+        public string StopShortName
+        {
+            get => RowKey;
+            set => RowKey = value;
+        }
         public DateTime AddDateTime { get; set; }
 
         public AzureFavoriteStop() { }
