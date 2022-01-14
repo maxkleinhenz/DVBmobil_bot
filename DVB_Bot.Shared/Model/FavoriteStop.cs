@@ -13,7 +13,7 @@ namespace DVB_Bot.Shared.Model
         public FavoriteStop(string chatId, string stopShortName, DateTime? addDateTime = null)
         {
             ChatId = chatId;
-            StopShortName = stopShortName;
+            StopShortName = stopShortName.ToUpper();
             AddDateTime = addDateTime ?? DateTime.Now;
         }
     }

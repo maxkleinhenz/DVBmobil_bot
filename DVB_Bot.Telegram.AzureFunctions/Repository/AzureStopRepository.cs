@@ -19,6 +19,7 @@ namespace DVB_Bot.Telegram.AzureFunctions.Repository
 
         public async Task<IStop> GetStopByShortNameAsync(string shortName)
         {
+            shortName = shortName.ToUpper();
             var stopEntity = await _cloudTableHelper.RetrieveEntityAsync<AzureStopEntity>(shortName[0].ToString(), shortName);
             return stopEntity;
         }

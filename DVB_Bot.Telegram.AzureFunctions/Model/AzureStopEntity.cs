@@ -24,11 +24,11 @@ namespace DVB_Bot.Telegram.AzureFunctions.Model
 
         public AzureStopEntity() { }
 
-        public AzureStopEntity(string shortName) : base(shortName[0].ToString(), shortName) { }
+        public AzureStopEntity(string shortName) : base(shortName[0].ToString().ToUpper(), shortName.ToUpper()) { }
 
         public AzureStopEntity(IStop stop) : this(stop.ShortName)
         {
-            ShortName = stop.ShortName;
+            ShortName = stop.ShortName.ToUpper();
             City = stop.City;
             Name = stop.Name;
             Code = stop.Code;

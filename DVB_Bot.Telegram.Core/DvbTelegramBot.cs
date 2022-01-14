@@ -38,20 +38,20 @@ namespace DVB_Bot.Telegram.Core
                     return;
 
                 var splittedMessage = messageText.Split(" ");
-                var shortName = splittedMessage.Length > 1 ? splittedMessage[1] : null;
+                var shortName = splittedMessage.Length > 1 ? splittedMessage[1].ToUpper() : null;
 
-                if (splittedMessage[0] == Commands.Commands.CommandStart)
+                if (string.Equals(splittedMessage[0], Commands.Commands.CommandStart, StringComparison.OrdinalIgnoreCase))
                 {
                     // print start message
                     await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_StartMessage);
                     await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
                 }
-                else if (splittedMessage[0] == Commands.Commands.CommandHelp)
+                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandHelp, StringComparison.OrdinalIgnoreCase))
                 {
                     // print help message
                     await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
                 }
-                else if (splittedMessage[0] == Commands.Commands.CommandAddStation)
+                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandAddStation, StringComparison.OrdinalIgnoreCase))
                 {
                     // add fav
                     if (string.IsNullOrEmpty(shortName))
@@ -64,7 +64,7 @@ namespace DVB_Bot.Telegram.Core
                     var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
                     await command.AddFavoriteStopAsync(telegramMessage.Chat, shortName);
                 }
-                else if (splittedMessage[0] == Commands.Commands.CommandRemoveStation)
+                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandRemoveStation, StringComparison.OrdinalIgnoreCase))
                 {
                     // remove fav
                     if (string.IsNullOrEmpty(shortName))
@@ -77,7 +77,7 @@ namespace DVB_Bot.Telegram.Core
                     var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
                     await command.RemoveFavoriteStopAsync(telegramMessage.Chat, shortName);
                 }
-                else if (splittedMessage[0] == Commands.Commands.CommandShowFavoriteStations)
+                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandShowFavoriteStations, StringComparison.OrdinalIgnoreCase))
                 {
                     // refresh keys
                     var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
@@ -112,17 +112,17 @@ namespace DVB_Bot.Telegram.Core
                 var command = query[0];
                 var shortName = query[1];
 
-                if (command == Commands.Commands.QueryLoadCommand)
+                if (string.Equals(command, Commands.Commands.QueryLoadCommand, StringComparison.OrdinalIgnoreCase))
                 {
                     var c = new ShowDeparturesCommand(_sendMessageService, _stopService, _favoriteStopService);
                     await c.ShowDeparturesAsync(callbackQuery.Message.Chat, shortName, StopService.DepartureShortLimit);
                 }
-                else if (command == Commands.Commands.QueryLoadMoreCommand)
+                else if (string.Equals(command, Commands.Commands.QueryLoadMoreCommand, StringComparison.OrdinalIgnoreCase))
                 {
                     var c = new ShowDeparturesCommand(_sendMessageService, _stopService, _favoriteStopService);
                     await c.ShowDeparturesAsync(callbackQuery.Message.Chat, shortName, StopService.DepartureLongLimit);
                 }
-                else if (command == Commands.Commands.QueryAddToFavoriteCommand)
+                else if (string.Equals(command, Commands.Commands.QueryAddToFavoriteCommand, StringComparison.OrdinalIgnoreCase))
                 {
                     var f = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
                     await f.AddFavoriteStopAsync(callbackQuery.Message.Chat, shortName);

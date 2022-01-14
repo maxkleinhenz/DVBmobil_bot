@@ -30,7 +30,7 @@ namespace DVB_Bot.Telegram.AzureFunctions.Model
         public AzureFavoriteStop(string chatId, string stopShortName, DateTime? addDateTime = null)
         {
             this.ChatId = chatId;
-            this.StopShortName = stopShortName;
+            this.StopShortName = stopShortName.ToUpper();
             AddDateTime = addDateTime ?? DateTime.Now;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DVB_Bot.AzureFunctions.Helper;
@@ -28,8 +29,8 @@ namespace DVB_Bot.Telegram.AzureFunctions.Repository
 
         public async Task<IFavoriteStop> RemoveFavoriteStopAsync(string chatId, string stopShortName)
         {
-            var allFavs = await GetFavoriteStopsAsync(chatId);
-            if (allFavs.All(f => f.StopShortName != stopShortName))
+            var allFavoriteStops = await GetFavoriteStopsAsync(chatId);
+            if (allFavoriteStops.All(f => !string.Equals(f.StopShortName, stopShortName, StringComparison.OrdinalIgnoreCase)))
                 return null;
 
             var favoriteStop = new AzureFavoriteStop(chatId, stopShortName);

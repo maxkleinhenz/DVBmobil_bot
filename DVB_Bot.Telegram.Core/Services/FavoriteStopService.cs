@@ -29,7 +29,7 @@ namespace DVB_Bot.Telegram.Core.Services
         public async Task<bool> IsFavoriteStopAsync(string chatId, string shortName)
         {
             var allFavs = await GetFavoriteStopsAsync(chatId);
-            return allFavs.Any(f => string.Equals(f.StopShortName, shortName, StringComparison.CurrentCultureIgnoreCase));
+            return allFavs.Any(f => string.Equals(f.StopShortName, shortName, StringComparison.OrdinalIgnoreCase));
         }
 
         public async Task<FavoriteStopResult> AddFavoriteStopAsync(string chatId, string shortName)

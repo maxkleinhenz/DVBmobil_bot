@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DVB_Bot.Shared.Model;
@@ -13,7 +14,7 @@ namespace DVB_Bot.Telegram.Local.Repository
         public Task<IFavoriteStop> AddFavoriteStopAsync(string chatId, string stopShortName)
         {
             var favStop = new FavoriteStop(chatId, stopShortName);
-            if (!_favStops.Any(f => f.ChatId == chatId && f.StopShortName == stopShortName))
+            if (!_favStops.Any(f => f.ChatId == chatId && string.Equals(f.StopShortName, stopShortName, StringComparison.OrdinalIgnoreCase))
             {
                 _favStops.Add(favStop);
             }
@@ -23,7 +24,7 @@ namespace DVB_Bot.Telegram.Local.Repository
 
         public Task<IFavoriteStop> RemoveFavoriteStopAsync(string chatId, string stopShortName)
         {
-            var favStop = _favStops.SingleOrDefault(f => f.ChatId == chatId && f.StopShortName == stopShortName);
+            var favStop = _favStops.SingleOrDefault(f => f.ChatId == chatId && string.Equals(f.StopShortName, stopShortName, StringComparison.OrdinalIgnoreCase));
 
             if (favStop == null)
                 return Task.FromResult((IFavoriteStop)new FavoriteStop(chatId, stopShortName));

@@ -14,7 +14,7 @@ namespace DVB_Bot.Shared.Model
 
         public Stop(string shortName, string name, string city, string code, string urlStop, string urlDeparture)
         {
-            ShortName = shortName;
+            ShortName = shortName.ToUpper();
             Name = name;
             City = city;
             Code = code;
