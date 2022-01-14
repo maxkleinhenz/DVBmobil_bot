@@ -6,14 +6,14 @@ using DVB_Bot.AzureFunctions.Helper;
 using DVB_Bot.Shared.Repository;
 using DVB_Bot.Telegram.AzureFunctions.Model;
 using DVB_Bot.Telegram.Local.Repository;
+using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace DVB_Bot.AzureFunctions.Importer
 {
     class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -29,14 +29,13 @@ namespace DVB_Bot.AzureFunctions.Importer
             await cloudTableHelper.DeleteAllEntitiesAsync<AzureStopEntity>();
 
             var stopRepository = new LocalStopRepository();
-
             await ImportStopsAsync(cloudTableHelper, stopRepository);
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
         }
 
-        private static async Task ImportStopsAsync(CloudTableHelper cloudTableHelper, IStopRepository stopRepository)
+        private static async Task ImportStopsAsync(ICloudTableHelper cloudTableHelper, IStopRepository stopRepository)
         {
             var allStops = (await stopRepository.GetAllStopsAsync()).Select(s => (ITableEntity)new AzureStopEntity(s)).ToList();
             await cloudTableHelper.InsertOrReplaceEntitiesAsync(allStops);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace DVB_Bot.AzureFunctions.Helper
 {
@@ -56,7 +56,7 @@ namespace DVB_Bot.AzureFunctions.Helper
 
                     if (cancellationToken.IsCancellationRequested) break;
 
-                    _ = await _table.ExecuteBatchAsync(batchOperation);
+                    _ = await _table.ExecuteBatchAsync(batchOperation, cancellationToken);
                     batchOperation.Clear();
                 }
             }
@@ -68,7 +68,7 @@ namespace DVB_Bot.AzureFunctions.Helper
             TableContinuationToken token = null;
             do
             {
-                var seg = await _table.ExecuteQuerySegmentedAsync(new TableQuery<T>(), token);
+                var seg = await _table.ExecuteQuerySegmentedAsync(new TableQuery<T>(), token, cancellationToken);
                 token = seg.ContinuationToken;
                 items.AddRange(seg);
 
@@ -85,7 +85,7 @@ namespace DVB_Bot.AzureFunctions.Helper
             };
 
             var continuationToken = new TableContinuationToken();
-            var items = await _table.ExecuteQuerySegmentedAsync<T>(query, continuationToken);
+            var items = await _table.ExecuteQuerySegmentedAsync(query, continuationToken);
             return items.ToList();
         }
 
@@ -115,7 +115,7 @@ namespace DVB_Bot.AzureFunctions.Helper
             var pendingOperations = new Dictionary<string, Stack<TableOperation>>();
             do
             {
-                var result = await _table.ExecuteQuerySegmentedAsync(new TableQuery<T>(), token);
+                var result = await _table.ExecuteQuerySegmentedAsync(new TableQuery<T>(), token, cancellationToken);
                 foreach (var row in result)
                 {
                     var op = TableOperation.Delete(row);
@@ -151,7 +151,7 @@ namespace DVB_Bot.AzureFunctions.Helper
                     }
 
                     //execute and reset
-                    _ = await _table.ExecuteBatchAsync(batchOperation);
+                    _ = await _table.ExecuteBatchAsync(batchOperation, cancellationToken);
                     current = 0;
                     batchOperation.Clear();
                 }

@@ -4,7 +4,7 @@ using DVB_Bot.AzureFunctions.Helper;
 using DVB_Bot.Shared.Model;
 using DVB_Bot.Shared.Repository;
 using DVB_Bot.Telegram.AzureFunctions.Model;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace DVB_Bot.Telegram.AzureFunctions.Repository
 {

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using DVB_Bot.Shared.Model;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace DVB_Bot.Telegram.AzureFunctions.Model
 {
