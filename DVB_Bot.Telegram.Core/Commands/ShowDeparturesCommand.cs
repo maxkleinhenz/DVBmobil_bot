@@ -56,9 +56,8 @@ namespace DVB_Bot.Telegram.Core.Commands
                                       departures.RequestedLimit == StopService.DepartureShortLimit;
             if (withLoadMoreCommand)
             {
-                var button = new InlineKeyboardButton
+                var button = new InlineKeyboardButton(Strings.ShowDeparturesCommand_LoadMoreDepartures)
                 {
-                    Text = Strings.ShowDeparturesCommand_LoadMoreDepartures,
                     CallbackData = $"{Commands.QueryLoadMoreCommand}{Commands.QueryDataSeparator}{shortName}"
                 };
                 inlineButtons.Add(new List<InlineKeyboardButton> { button });
@@ -66,9 +65,8 @@ namespace DVB_Bot.Telegram.Core.Commands
 
             if (!await _favoriteStopService.IsFavoriteStopAsync(chat.Id.ToString(), shortName))
             {
-                var button = new InlineKeyboardButton
+                var button = new InlineKeyboardButton(Strings.ShowDeparturesCommand_AddToFavorites)
                 {
-                    Text = Strings.ShowDeparturesCommand_AddToFavorites,
                     CallbackData = $"{Commands.QueryAddToFavoriteCommand}{Commands.QueryDataSeparator}{shortName}",
                 };
                 inlineButtons.Add(new List<InlineKeyboardButton> { button });
@@ -104,9 +102,8 @@ namespace DVB_Bot.Telegram.Core.Commands
             var inlineButtons = new List<List<InlineKeyboardButton>>();
             foreach (var stop in stops)
             {
-                var button = new InlineKeyboardButton
+                var button = new InlineKeyboardButton(stop.Name)
                 {
-                    Text = stop.Name,
                     CallbackData = $"{Commands.QueryLoadCommand}{Commands.QueryDataSeparator}{stop.ShortName}"
                 };
                 inlineButtons.Add(new List<InlineKeyboardButton> { button });

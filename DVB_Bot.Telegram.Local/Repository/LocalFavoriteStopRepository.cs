@@ -14,7 +14,7 @@ namespace DVB_Bot.Telegram.Local.Repository
         public Task<IFavoriteStop> AddFavoriteStopAsync(string chatId, string stopShortName)
         {
             var favStop = new FavoriteStop(chatId, stopShortName);
-            if (!_favStops.Any(f => f.ChatId == chatId && string.Equals(f.StopShortName, stopShortName, StringComparison.OrdinalIgnoreCase))
+            if (!_favStops.Any(f => f.ChatId == chatId && string.Equals(f.StopShortName, stopShortName, StringComparison.OrdinalIgnoreCase)))
             {
                 _favStops.Add(favStop);
             }

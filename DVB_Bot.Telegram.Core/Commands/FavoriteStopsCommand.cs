@@ -76,7 +76,7 @@ namespace DVB_Bot.Telegram.Core.Commands
             if (tempButton.Any())
                 nestedButtonList.Add(tempButton);
 
-            return new ReplyKeyboardMarkup(nestedButtonList, resizeKeyboard: true);
+            return new ReplyKeyboardMarkup(nestedButtonList) { ResizeKeyboard = true };
         }
 
         private async Task HandleSuccessAsync(Chat chat, FavoriteStopResult result, string message)
