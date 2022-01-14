@@ -23,7 +23,12 @@ namespace DVB_Bot.Telegram.AzureFunctions
             ILogger log,
             ExecutionContext context)
         {
-            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            string requestBody = null;
+            using (var streamReader = new StreamReader(req.Body))
+            {
+                requestBody = await streamReader.ReadToEndAsync();
+            }
+
             var data = JsonConvert.DeserializeObject<TelegramRequestBody>(requestBody);
 
             var config = CreateConfiguration(context);
@@ -39,11 +44,11 @@ namespace DVB_Bot.Telegram.AzureFunctions
 
             var dvbTelegramBot = new DvbTelegramBot(config["TelegramBotToken"], stopRepository, favoriteStopRepository);
 
-            if (data.Message != null)
+            if (data?.Message != null)
             {
                 await dvbTelegramBot.ComputeMessageAsync(data.Message);
             }
-            else if (data.Callback_Query != null)
+            else if (data?.Callback_Query != null)
             {
                 await dvbTelegramBot.ComputeCallbackQueryAsync(data.Callback_Query);
             }
