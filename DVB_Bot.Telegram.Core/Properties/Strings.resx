@@ -172,6 +172,10 @@ Zum Beispiel: {0} HBF</value>
 \- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
 \- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
 \- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
-\- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen</value>
+\- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen
+
+Für Fragen, Anregungen und Kritik kann mir eine E\-Mail geschrieben werden: dvbmobil@outlook\.de
+
+Der Code des Bots ist Open\-Source: [https://github\.com/maxkleinhenz/DVBmobil\_bot](https://github.com/maxkleinhenz/DVBmobil_bot)</value>
   </data>
 </root>

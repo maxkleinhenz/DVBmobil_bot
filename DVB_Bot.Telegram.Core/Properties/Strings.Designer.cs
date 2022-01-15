@@ -147,7 +147,11 @@ namespace DVB_Bot.Telegram.Core.Properties {
         ///\- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
         ///\- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
         ///\- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
-        ///\- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen.
+        ///\- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen
+        ///
+        ///Für Fragen, Anregungen und Kritik kann mir eine E\-Mail geschrieben werden: dvbmobil@outlook\.de
+        ///
+        ///Der Code des Bots ist Open\-So [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Programm_HelpMessage {
             get {
