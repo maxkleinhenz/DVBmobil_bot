@@ -2,6 +2,7 @@
 using DVB_Bot.Telegram.Core.Properties;
 using DVB_Bot.Telegram.Core.Services;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using DVB_Bot.Shared.Repository;
 using Telegram.Bot;
@@ -40,54 +41,59 @@ namespace DVB_Bot.Telegram.Core
                 var splittedMessage = messageText.Split(" ");
                 var shortName = splittedMessage.Length > 1 ? splittedMessage[1].ToUpper() : null;
 
-                if (string.Equals(splittedMessage[0], Commands.Commands.CommandStart, StringComparison.OrdinalIgnoreCase))
+                if (splittedMessage[0].StartsWith("/"))
                 {
-                    // print start message
-                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_StartMessage);
-                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
-                }
-                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandHelp, StringComparison.OrdinalIgnoreCase))
-                {
-                    // print help message
-                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
-                }
-                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandAddStation, StringComparison.OrdinalIgnoreCase))
-                {
-                    // add fav
-                    if (string.IsNullOrEmpty(shortName))
-                    {
-                        var m = string.Format(Strings.Program_SpecifyStop, Commands.Commands.CommandAddStation);
-                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, m);
-                        return;
-                    }
+                    // all commands
 
-                    var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await command.AddFavoriteStopAsync(telegramMessage.Chat, shortName);
-                }
-                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandRemoveStation, StringComparison.OrdinalIgnoreCase))
-                {
-                    // remove fav
-                    if (string.IsNullOrEmpty(shortName))
+                    if (string.Equals(splittedMessage[0], Commands.Commands.CommandStart, StringComparison.OrdinalIgnoreCase))
                     {
-                        var m = string.Format(Strings.Program_SpecifyStop, Commands.Commands.CommandRemoveStation);
-                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, m);
-                        return;
+                        // print start message
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_StartMessage);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
                     }
+                    else if (string.Equals(splittedMessage[0], Commands.Commands.CommandHelp, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // print help message
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                    }
+                    else if (string.Equals(splittedMessage[0], Commands.Commands.CommandAddStation, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // add fav
+                        if (string.IsNullOrEmpty(shortName))
+                        {
+                            var m = string.Format(Strings.Program_SpecifyStop, Commands.Commands.CommandAddStation);
+                            await _sendMessageService.SendMessageAsync(telegramMessage.Chat, m);
+                            return;
+                        }
 
-                    var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await command.RemoveFavoriteStopAsync(telegramMessage.Chat, shortName);
-                }
-                else if (string.Equals(splittedMessage[0], Commands.Commands.CommandShowFavoriteStations, StringComparison.OrdinalIgnoreCase))
-                {
-                    // refresh keys
-                    var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
-                    await command.ShowFavoriteStopsAsync(telegramMessage.Chat);
-                }
-                else if (splittedMessage[0].StartsWith("/"))
-                {
-                    // invalid command
-                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Program_InvalidCommand);
-                    await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                        var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
+                        await command.AddFavoriteStopAsync(telegramMessage.Chat, shortName);
+                    }
+                    else if (string.Equals(splittedMessage[0], Commands.Commands.CommandRemoveStation, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // remove fav
+                        if (string.IsNullOrEmpty(shortName))
+                        {
+                            var m = string.Format(Strings.Program_SpecifyStop, Commands.Commands.CommandRemoveStation);
+                            await _sendMessageService.SendMessageAsync(telegramMessage.Chat, m);
+                            return;
+                        }
+
+                        var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
+                        await command.RemoveFavoriteStopAsync(telegramMessage.Chat, shortName);
+                    }
+                    else if (string.Equals(splittedMessage[0], Commands.Commands.CommandShowFavoriteStations, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // refresh keys
+                        var command = new FavoriteStopsCommand(_sendMessageService, _favoriteStopService);
+                        await command.ShowFavoriteStopsAsync(telegramMessage.Chat);
+                    }
+                    else
+                    {
+                        // invalid command
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Program_InvalidCommand);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                    }
                 }
                 else
                 {
@@ -100,7 +106,7 @@ namespace DVB_Bot.Telegram.Core
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                Debug.WriteLine(exception);
             }
         }
 
@@ -108,7 +114,14 @@ namespace DVB_Bot.Telegram.Core
         {
             try
             {
-                var query = callbackQuery.Data.Split(Commands.Commands.QueryDataSeparator);
+                var query = callbackQuery?.Data?.Split(Commands.Commands.QueryDataSeparator);
+
+                if (query == null || query.Length < 2)
+                {
+                    Debug.WriteLine("query is null or isn't in the correct format");
+                    return;
+                }
+
                 var command = query[0];
                 var shortName = query[1];
 
@@ -130,7 +143,7 @@ namespace DVB_Bot.Telegram.Core
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                Debug.WriteLine(exception);
             }
         }
     }
