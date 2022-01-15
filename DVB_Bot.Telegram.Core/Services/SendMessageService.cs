@@ -16,9 +16,13 @@ namespace DVB_Bot.Telegram.Core.Services
             _botClient = botClient;
         }
 
-        public async Task SendMessageAsync(Chat chat, string message)
+        public async Task SendMessageAsync(Chat chat, string message, bool escapeMessage = true)
         {
-            var escapedMessage = EscapeStrings(message);
+            var escapedMessage = message;
+            if (escapeMessage)
+            {
+                escapedMessage = EscapeStrings(message);
+            }
 
             await _botClient.SendTextMessageAsync(
                 chatId: chat,
@@ -28,9 +32,13 @@ namespace DVB_Bot.Telegram.Core.Services
             );
         }
 
-        public async Task SendMessageAsync(Chat chat, string message, IReplyMarkup replyMarkup)
+        public async Task SendMessageAsync(Chat chat, string message, IReplyMarkup replyMarkup, bool escapeMessage = true)
         {
-            var escapedMessage = EscapeStrings(message);
+            var escapedMessage = message;
+            if (escapeMessage)
+            {
+                escapedMessage = EscapeStrings(message);
+            }
 
             await _botClient.SendTextMessageAsync(
                 chatId: chat,

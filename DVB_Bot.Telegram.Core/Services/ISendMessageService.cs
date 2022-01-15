@@ -6,7 +6,7 @@ namespace DVB_Bot.Telegram.Core.Services
 {
     public interface ISendMessageService
     {
-        Task SendMessageAsync(Chat chat, string message);
-        Task SendMessageAsync(Chat chat, string message, IReplyMarkup replyMarkup);
+        Task SendMessageAsync(Chat chat, string message, bool escapeMessage = true);
+        Task SendMessageAsync(Chat chat, string message, IReplyMarkup replyMarkup, bool escapeMessage = true);
     }
 }

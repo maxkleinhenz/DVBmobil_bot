@@ -49,12 +49,12 @@ namespace DVB_Bot.Telegram.Core
                     {
                         // print start message
                         await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_StartMessage);
-                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage, escapeMessage: false);
                     }
                     else if (string.Equals(splittedMessage[0], Commands.Commands.CommandHelp, StringComparison.OrdinalIgnoreCase))
                     {
                         // print help message
-                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage, escapeMessage: false);
                     }
                     else if (string.Equals(splittedMessage[0], Commands.Commands.CommandAddStation, StringComparison.OrdinalIgnoreCase))
                     {
@@ -92,7 +92,7 @@ namespace DVB_Bot.Telegram.Core
                     {
                         // invalid command
                         await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Program_InvalidCommand);
-                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage);
+                        await _sendMessageService.SendMessageAsync(telegramMessage.Chat, Strings.Programm_HelpMessage, escapeMessage: false);
                     }
                 }
                 else
