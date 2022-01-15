@@ -124,10 +124,10 @@
     <value>Als Favorit hinzufügen</value>
   </data>
   <data name="ShowDeparturesCommand_CouldNotFoundDepartures" xml:space="preserve">
-    <value>Keine Abfahrten verfügbar.</value>
+    <value>Keine Abfahrten verfügbar</value>
   </data>
   <data name="ShowDeparturesCommand_CouldNotFoundStop" xml:space="preserve">
-    <value>Haltestelle nicht gefunden.</value>
+    <value>Haltestelle nicht gefunden</value>
   </data>
   <data name="ShowDeparturesCommand_Error" xml:space="preserve">
     <value>Bei der Abfrage trat ein Fehler auf :(</value>
@@ -136,42 +136,42 @@
     <value>Meintest du?</value>
   </data>
   <data name="FavoriteStopsCommand_StopHasBeenAddedToFavorites" xml:space="preserve">
-    <value>Haltestelle zu deinen Favoriten hinzugefügt.</value>
+    <value>Haltestelle zu deinen Favoriten hinzugefügt</value>
   </data>
   <data name="FavoriteStopsCommand_RemovedFromFavorites" xml:space="preserve">
-    <value>Haltestelle von den Favoriten entfernt.</value>
+    <value>Haltestelle von den Favoriten entfernt</value>
   </data>
   <data name="FavoriteStopsCommand_RefreshFavorties" xml:space="preserve">
-    <value>Favoriten aktualisiert.</value>
+    <value>Favoritenliste aktualisiert</value>
   </data>
   <data name="FavoriteStopsCommand_StopIsAlreadyFavorites" xml:space="preserve">
-    <value>Die Haltestelle ist bereits in deiner Favoritenliste.</value>
+    <value>Die Haltestelle ist bereits in deiner Favoritenliste</value>
   </data>
   <data name="FavoriteStopsCommand_StopIsNotFavorite" xml:space="preserve">
-    <value>Die Haltestelle ist nicht in deiner Favoritenliste.</value>
+    <value>Die Haltestelle ist nicht in deiner Favoritenliste</value>
   </data>
   <data name="FavoriteStopsCommand_StopCouldNotFound" xml:space="preserve">
-    <value>Haltestelle nicht gefunden.</value>
+    <value>Haltestelle nicht gefunden</value>
   </data>
   <data name="FavoriteStopsCommand_MaxFavorites" xml:space="preserve">
-    <value>Du kannst nicht mehr Favoriten speichern.</value>
+    <value>Du kannst nicht mehr Favoriten speichern</value>
   </data>
   <data name="Programm_StartMessage" xml:space="preserve">
     <value>Hallo,
-bei mir kannst du dich über die Abfahrten an den Haltestellen der DVB in Dresden und Umgebung informieren.</value>
+bei mir kannst du dich über die Abfahrten an den Haltestellen der DVB in Dresden und Umgebung informieren</value>
   </data>
   <data name="Program_SpecifyStop" xml:space="preserve">
-    <value>Bitte gebe auch das Haltestellenkürzel an.
+    <value>Bitte gebe auch das Haltestellenkürzel an
 Zum Beispiel: {0} HBF</value>
   </data>
   <data name="Program_InvalidCommand" xml:space="preserve">
-    <value>Der Befehl ist ungültig.</value>
+    <value>Der Befehl ist ungültig</value>
   </data>
   <data name="Programm_HelpMessage" xml:space="preserve">
     <value>Das kann ich:
-- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
-- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
-- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
-- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen</value>
+\- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
+\- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
+\- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
+\- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen</value>
   </data>
 </root>

@@ -120,7 +120,7 @@ namespace DVB_Bot.Telegram.Core.Commands
             var lengthArrivesInMinutes = Math.Max(MinLengthArrivesInMinutes, departures.DepartureRows.Max(_ => _.ArrivesInMinutes.Length));
 
             var builder = new StringBuilder();
-            builder.AppendLine($"*{departures.StopName}* ({departures.StopShortName})");
+            builder.AppendLine($"*{departures.StopName}* \\({departures.StopShortName}\\)");
             foreach (var row in departures.DepartureRows)
             {
                 var finalStop = row.FinalStop;

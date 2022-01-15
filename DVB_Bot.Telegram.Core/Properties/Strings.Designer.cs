@@ -61,7 +61,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Du kannst nicht mehr Favoriten speichern..
+        ///   Looks up a localized string similar to Du kannst nicht mehr Favoriten speichern.
         /// </summary>
         internal static string FavoriteStopsCommand_MaxFavorites {
             get {
@@ -70,7 +70,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favoriten aktualisiert..
+        ///   Looks up a localized string similar to Favoritenliste aktualisiert.
         /// </summary>
         internal static string FavoriteStopsCommand_RefreshFavorties {
             get {
@@ -79,7 +79,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Haltestelle von den Favoriten entfernt..
+        ///   Looks up a localized string similar to Haltestelle von den Favoriten entfernt.
         /// </summary>
         internal static string FavoriteStopsCommand_RemovedFromFavorites {
             get {
@@ -88,7 +88,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Haltestelle nicht gefunden..
+        ///   Looks up a localized string similar to Haltestelle nicht gefunden.
         /// </summary>
         internal static string FavoriteStopsCommand_StopCouldNotFound {
             get {
@@ -97,7 +97,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Haltestelle zu deinen Favoriten hinzugefügt..
+        ///   Looks up a localized string similar to Haltestelle zu deinen Favoriten hinzugefügt.
         /// </summary>
         internal static string FavoriteStopsCommand_StopHasBeenAddedToFavorites {
             get {
@@ -106,7 +106,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Haltestelle ist bereits in deiner Favoritenliste..
+        ///   Looks up a localized string similar to Die Haltestelle ist bereits in deiner Favoritenliste.
         /// </summary>
         internal static string FavoriteStopsCommand_StopIsAlreadyFavorites {
             get {
@@ -115,7 +115,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Die Haltestelle ist nicht in deiner Favoritenliste..
+        ///   Looks up a localized string similar to Die Haltestelle ist nicht in deiner Favoritenliste.
         /// </summary>
         internal static string FavoriteStopsCommand_StopIsNotFavorite {
             get {
@@ -124,7 +124,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Der Befehl ist ungültig..
+        ///   Looks up a localized string similar to Der Befehl ist ungültig.
         /// </summary>
         internal static string Program_InvalidCommand {
             get {
@@ -133,7 +133,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bitte gebe auch das Haltestellenkürzel an.
+        ///   Looks up a localized string similar to Bitte gebe auch das Haltestellenkürzel an
         ///Zum Beispiel: {0} HBF.
         /// </summary>
         internal static string Program_SpecifyStop {
@@ -144,10 +144,10 @@ namespace DVB_Bot.Telegram.Core.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Das kann ich:
-        ///- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
-        ///- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
-        ///- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
-        ///- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen.
+        ///\- Schreibe die Haltestelle oder ihr Kürzel in den Chat und ich sende dir die Abfahrten
+        ///\- Schreibe /add und das Haltestellenkürzel, um die Haltestelle in deine Favoritenliste aufzunehmen
+        ///\- Schreibe /remove und das Haltestellenkürzel, um die Haltestelle aus deinen Favoriten zu entfernen
+        ///\- Schreibe /favs, um deine Favoritenliste in der App wieder anzuzeigen.
         /// </summary>
         internal static string Programm_HelpMessage {
             get {
@@ -157,7 +157,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Hallo,
-        ///bei mir kannst du dich über die Abfahrten an den Haltestellen der DVB in Dresden und Umgebung informieren..
+        ///bei mir kannst du dich über die Abfahrten an den Haltestellen der DVB in Dresden und Umgebung informieren.
         /// </summary>
         internal static string Programm_StartMessage {
             get {
@@ -175,7 +175,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keine Abfahrten verfügbar..
+        ///   Looks up a localized string similar to Keine Abfahrten verfügbar.
         /// </summary>
         internal static string ShowDeparturesCommand_CouldNotFoundDepartures {
             get {
@@ -184,7 +184,7 @@ namespace DVB_Bot.Telegram.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Haltestelle nicht gefunden..
+        ///   Looks up a localized string similar to Haltestelle nicht gefunden.
         /// </summary>
         internal static string ShowDeparturesCommand_CouldNotFoundStop {
             get {

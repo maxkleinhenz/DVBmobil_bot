@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -20,7 +21,8 @@ namespace DVB_Bot.Telegram.Core.Services
             await _botClient.SendTextMessageAsync(
                 chatId: chat,
                 text: message,
-                parseMode: ParseMode.Markdown
+                parseMode: ParseMode.MarkdownV2,
+                disableWebPagePreview: true
             );
         }
 
@@ -29,7 +31,7 @@ namespace DVB_Bot.Telegram.Core.Services
             await _botClient.SendTextMessageAsync(
                 chatId: chat,
                 text: message,
-                parseMode: ParseMode.Markdown,
+                parseMode: ParseMode.MarkdownV2,
                 replyMarkup: replyMarkup
             );
         }
