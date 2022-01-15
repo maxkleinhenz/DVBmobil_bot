@@ -765,7 +765,9 @@ namespace DVB_Bot.Telegram.Local.Repository
                 {"EHWB", new Stop("EHWB","Haltepunkt","Weinböhla","33004401","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Haltepunkt Weinböhla","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004401")},
                 {"EWBK", new Stop("EWBK","Kirchplatz","Weinböhla","33004137","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Weinböhla Kirchplatz","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004137")},
                 {"KOL", new Stop("KOL","Köhlerstraße","Weinböhla","33004147","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Köhlerstrasse","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004147")},
-                {"WBL", new Stop("WBL","P+R Hp. Weinböhla","Weinböhla","33004401","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Weinböhla","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004401")}
+                {"WBL", new Stop("WBL","P+R Hp. Weinböhla","Weinböhla","33004401","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Weinböhla&hst=Weinböhla","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33004401")},
+                {"FAB", new Stop("FAB","Fabrikstraße","Dresden","33000726","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Dresden&hst=FAB","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33000726")},
+                {"BRW", new Stop("BRW","Brockwitzer Straße","Dresden","33000216","http://widgets.vvo-online.de/abfahrtsmonitor/Haltestelle.do?ort=Dresden&hst=Brockwitzer%20Stra%C3%9Fe","http://widgets.vvo-online.de/abfahrtsmonitor/Abfahrten.do?vz=0&lim={0}&hst={1}33000216")}
             };
 
         public Task<IStop> GetStopByShortNameAsync(string shortName)
