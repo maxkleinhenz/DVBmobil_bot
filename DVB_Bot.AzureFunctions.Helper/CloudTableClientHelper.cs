@@ -12,7 +12,13 @@ namespace DVB_Bot.AzureFunctions.Helper
             return storageAccount.CreateCloudTableClient();
         }
 
-        public async Task<CloudTable> GetCloudTableAsync(CloudTableClient tableClientHelper, string tableName)
+        public CloudTable GetCloudTable(CloudTableClient tableClientHelper, string tableName)
+        {
+            var favoriteStopTable = tableClientHelper.GetTableReference(tableName);
+            return favoriteStopTable;
+        }
+
+        public async Task<CloudTable> GetCloudTableAndCreateAsync(CloudTableClient tableClientHelper, string tableName)
         {
             var favoriteStopTable = tableClientHelper.GetTableReference(tableName);
             await favoriteStopTable.CreateIfNotExistsAsync();

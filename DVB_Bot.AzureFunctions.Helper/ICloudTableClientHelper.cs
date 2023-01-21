@@ -6,6 +6,7 @@ namespace DVB_Bot.AzureFunctions.Helper
     public interface ICloudTableClientHelper
     {
         CloudTableClient GetTableClient(string storageConnectionString);
-        Task<CloudTable> GetCloudTableAsync(CloudTableClient tableClientHelper, string tableName);
+        CloudTable GetCloudTable(CloudTableClient tableClientHelper, string tableName);
+        Task<CloudTable> GetCloudTableAndCreateAsync(CloudTableClient tableClientHelper, string tableName);
     }
 }

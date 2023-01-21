@@ -23,7 +23,7 @@ namespace DVB_Bot.AzureFunctions.Importer
             var cloudTableClientHelper = new CloudTableClientHelper();
             var tableClient = cloudTableClientHelper.GetTableClient(configuration.GetSection("azure:StorageConnectionString").Value);
 
-            var stopsTable = await cloudTableClientHelper.GetCloudTableAsync(tableClient, "Stops");
+            var stopsTable = cloudTableClientHelper.GetCloudTable(tableClient, "Stops");
 
             var cloudTableHelper = new CloudTableHelper(stopsTable);
             await cloudTableHelper.DeleteAllEntitiesAsync<AzureStopEntity>();

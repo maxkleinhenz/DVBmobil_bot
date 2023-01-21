@@ -36,10 +36,10 @@ namespace DVB_Bot.Telegram.AzureFunctions
             var cloudTableClientHelper = new CloudTableClientHelper();
             var tableClient = cloudTableClientHelper.GetTableClient(config["StorageConnectionString"]);
 
-            var stopTable = await cloudTableClientHelper.GetCloudTableAsync(tableClient, "Stops");
+            var stopTable = cloudTableClientHelper.GetCloudTable(tableClient, "Stops");
             var stopRepository = new AzureStopRepository(stopTable);
 
-            var favoriteStopTable = await cloudTableClientHelper.GetCloudTableAsync(tableClient, "FavoriteStops");
+            var favoriteStopTable = cloudTableClientHelper.GetCloudTable(tableClient, "FavoriteStops");
             var favoriteStopRepository = new AzureFavoriteStopRepository(favoriteStopTable);
 
             var dvbTelegramBot = new DvbTelegramBot(config["TelegramBotToken"], stopRepository, favoriteStopRepository);
