@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types;
 
-namespace DVB_Bot.Telegram.AzureFunctions
+namespace DVB_Bot.Telegram.AzureFunctionsV4
 {
     public class TelegramRequestBody
     {

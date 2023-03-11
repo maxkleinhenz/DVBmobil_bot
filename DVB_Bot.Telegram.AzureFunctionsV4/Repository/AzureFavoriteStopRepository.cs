@@ -1,47 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Azure.Data.Tables;
 using DVB_Bot.AzureFunctions.Helper;
 using DVB_Bot.Shared.Model;
 using DVB_Bot.Shared.Repository;
-using DVB_Bot.Telegram.AzureFunctions.Model;
-using Microsoft.Azure.Cosmos.Table;
+using DVB_Bot.Telegram.AzureFunctionsV4.Model;
 
-namespace DVB_Bot.Telegram.AzureFunctions.Repository
+namespace DVB_Bot.Telegram.AzureFunctionsV4.Repository
 {
     public class AzureFavoriteStopRepository : IFavoriteStopRepository
     {
-        private readonly CloudTableHelper _cloudTableHelper;
+        private readonly ITableClientHelper tableClientHelper;
 
-        public AzureFavoriteStopRepository(CloudTable table)
+        public AzureFavoriteStopRepository(TableClient tableClient)
         {
-            _cloudTableHelper = new CloudTableHelper(table);
+            tableClientHelper = new TableClientHelper(tableClient);
         }
 
         public async Task<IFavoriteStop> AddFavoriteStopAsync(string chatId, string stopShortName)
         {
             var favoriteStop = new AzureFavoriteStop(chatId, stopShortName);
-            await _cloudTableHelper.InsertOrReplaceEntityAsync(favoriteStop);
+            await tableClientHelper.UpsertEntityAsync(favoriteStop);
 
             return favoriteStop;
         }
 
-        public async Task<IFavoriteStop> RemoveFavoriteStopAsync(string chatId, string stopShortName)
+        public async Task<IFavoriteStop?> RemoveFavoriteStopAsync(string chatId, string stopShortName)
         {
             var allFavoriteStops = await GetFavoriteStopsAsync(chatId);
             if (allFavoriteStops.All(f => !string.Equals(f.StopShortName, stopShortName, StringComparison.OrdinalIgnoreCase)))
                 return null;
 
             var favoriteStop = new AzureFavoriteStop(chatId, stopShortName);
-            await _cloudTableHelper.DeleteEntityAsync(favoriteStop);
+            await tableClientHelper.DeleteEntityAsync(favoriteStop);
 
             return favoriteStop;
         }
 
         public async Task<List<IFavoriteStop>> GetFavoriteStopsAsync(string chatId)
         {
-            var favoriteStops = await _cloudTableHelper.RetrieveEntitiesByPartitionKeyAsync<AzureFavoriteStop>(chatId);
+            var favoriteStops = await tableClientHelper.QueryAllAsync<AzureFavoriteStop>(chatId);
             return new List<IFavoriteStop>(favoriteStops.OrderBy(_ => _.AddDateTime).ToList());
         }
     }

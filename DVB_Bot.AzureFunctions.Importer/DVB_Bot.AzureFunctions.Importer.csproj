@@ -6,14 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Data.Tables" Version="12.7.1" />
+    <PackageReference Include="Azure.Data.Tables" Version="12.8.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DVB_Bot.Telegram.AzureFunctions\DVB_Bot.Telegram.AzureFunctions.csproj" />
+    <ProjectReference Include="..\DVB_Bot.AzureFunctions.Helper\DVB_Bot.AzureFunctions.Helper.csproj" />
+    <ProjectReference Include="..\DVB_Bot.Telegram.AzureFunctionsV4\DVB_Bot.Telegram.AzureFunctionsV4.csproj" />
     <ProjectReference Include="..\DVB_Bot.Telegram.Local\DVB_Bot.Telegram.Local.csproj" />
   </ItemGroup>
 
