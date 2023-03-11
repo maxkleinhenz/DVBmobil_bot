@@ -2,11 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Data.Tables;
 using DVB_Bot.AzureFunctions.Helper;
 using DVB_Bot.Shared.Repository;
-using DVB_Bot.Telegram.AzureFunctions.Model;
+using DVB_Bot.Telegram.AzureFunctionsV4.Model;
 using DVB_Bot.Telegram.Local.Repository;
-using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Extensions.Configuration;
 
 namespace DVB_Bot.AzureFunctions.Importer
@@ -20,25 +20,25 @@ namespace DVB_Bot.AzureFunctions.Importer
                 .AddJsonFile("appSecrets.json", optional: false, reloadOnChange: true);
             var configuration = builder.Build();
 
-            var cloudTableClientHelper = new CloudTableClientHelper();
-            var tableClient = cloudTableClientHelper.GetTableClient(configuration.GetSection("azure:StorageConnectionString").Value);
+            var tableServiceClientHelper = new TableServiceClientHelper();
+            var tableClient = tableServiceClientHelper.CreateTableServiceClient(configuration.GetSection("azure:StorageConnectionString").Value);
 
-            var stopsTable = cloudTableClientHelper.GetCloudTable(tableClient, "Stops");
+            var stopsTable = tableServiceClientHelper.GetTableClient(tableClient, "Stops");
 
-            var cloudTableHelper = new CloudTableHelper(stopsTable);
-            await cloudTableHelper.DeleteAllEntitiesAsync<AzureStopEntity>();
+            var tableClientHelper = new TableClientHelper(stopsTable);
+            await tableClientHelper.DeleteAllEntitiesAsync<AzureStopEntity>();
 
             var stopRepository = new LocalStopRepository();
-            await ImportStopsAsync(cloudTableHelper, stopRepository);
+            await ImportStopsAsync(tableClientHelper, stopRepository);
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
         }
 
-        private static async Task ImportStopsAsync(ICloudTableHelper cloudTableHelper, IStopRepository stopRepository)
+        private static async Task ImportStopsAsync(ITableClientHelper ableClientHelper, IStopRepository stopRepository)
         {
             var allStops = (await stopRepository.GetAllStopsAsync()).Select(s => (ITableEntity)new AzureStopEntity(s)).ToList();
-            await cloudTableHelper.InsertOrReplaceEntitiesAsync(allStops);
+            await ableClientHelper.UpsertEntitiesAsync(allStops);
         }
     }
 }

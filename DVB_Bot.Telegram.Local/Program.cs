@@ -7,7 +7,7 @@ using DVB_Bot.Telegram.Core;
 using DVB_Bot.Telegram.Local.Repository;
 using Microsoft.Extensions.Configuration;
 using Telegram.Bot;
-using Telegram.Bot.Extensions.Polling;
+using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 

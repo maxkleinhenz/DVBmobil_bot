@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /DVB_Bot.Telegram.Local/appSecrets.json
 /DVB_Bot.AzureFunctions.Importer/appSecrets.json
+/DVB_Bot.Telegram.AzureFunctionsV4/Properties/ServiceDependencies

@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Shared", "DVB_Bot.Shared\DVB_Bot.Shared.csproj", "{7430F175-271E-406D-A319-10200B90F914}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Telegram.Core", "DVB_Bot.Telegram.Core\DVB_Bot.Telegram.Core.csproj", "{42BE48AE-831A-4095-B295-E9F79668844C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Telegram.AzureFunctions", "DVB_Bot.Telegram.AzureFunctions\DVB_Bot.Telegram.AzureFunctions.csproj", "{2CE70977-6494-40AF-BFDD-92E9D7423CF0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Telegram.Local", "DVB_Bot.Telegram.Local\DVB_Bot.Telegram.Local.csproj", "{F7980FD6-1BE1-4F16-BFF6-DCED87A625D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.AzureFunctions.Helper", "DVB_Bot.AzureFunctions.Helper\DVB_Bot.AzureFunctions.Helper.csproj", "{D3716308-3354-4805-95E1-A4C105D1C702}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.AzureFunctions.Importer", "DVB_Bot.AzureFunctions.Importer\DVB_Bot.AzureFunctions.Importer.csproj", "{237E7F80-5B43-49DE-8A58-BDB62B80D252}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVB_Bot.Telegram.AzureFunctionsV4", "DVB_Bot.Telegram.AzureFunctionsV4\DVB_Bot.Telegram.AzureFunctionsV4.csproj", "{66A674C1-35FC-4BD5-A11F-7E25218E7DF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{42BE48AE-831A-4095-B295-E9F79668844C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42BE48AE-831A-4095-B295-E9F79668844C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42BE48AE-831A-4095-B295-E9F79668844C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CE70977-6494-40AF-BFDD-92E9D7423CF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F7980FD6-1BE1-4F16-BFF6-DCED87A625D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F7980FD6-1BE1-4F16-BFF6-DCED87A625D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7980FD6-1BE1-4F16-BFF6-DCED87A625D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{237E7F80-5B43-49DE-8A58-BDB62B80D252}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{237E7F80-5B43-49DE-8A58-BDB62B80D252}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{237E7F80-5B43-49DE-8A58-BDB62B80D252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A674C1-35FC-4BD5-A11F-7E25218E7DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A674C1-35FC-4BD5-A11F-7E25218E7DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A674C1-35FC-4BD5-A11F-7E25218E7DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A674C1-35FC-4BD5-A11F-7E25218E7DF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
